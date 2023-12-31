@@ -1,6 +1,9 @@
 # STQM2103 Group Assignment 1
 
-## Submitted by: 
+## Topic 6: 
+ Relation – Print Matrix
+
+## Submitted by
 Solution Makers
 
 ## Group Members
