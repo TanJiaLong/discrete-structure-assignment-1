@@ -1,4 +1,4 @@
-# STQM2103 Group Assignment
+# STQM2103 Group Assignment 1
 
 Submitted by: Solution Makers
 
