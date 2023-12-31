@@ -32,8 +32,8 @@ public class Main {
         int maxDomain = 0;
         int maxRange = 0;
 
-        for (int i = 0; i < pairs.length; i++) {
-            String[] elements = pairs[i].split(",");
+        for (String s : pairs) {
+            String[] elements = s.split(",");
             int curDomain = Integer.parseInt(elements[0]);
             int curRange = Integer.parseInt(elements[1]);
 
