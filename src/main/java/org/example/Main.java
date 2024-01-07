@@ -11,33 +11,52 @@ public class Main {
                 "Enter relation R in the form of R = {(a1,b1), (a2,b2), ..., (an,bn)}: "
         );
         String inputRelation = scanner.next() + scanner.nextLine();
+        while(!inputRelation.startsWith("{(") || !inputRelation.endsWith(")}") || !inputRelation.contains(",") || !inputRelation.matches(".*\\([^,]+,[^,]+\\).*")){
+            System.out.print(
+                    "Invalid input. Please provide a valid relation in the specified format.\n" +
+                    "Enter relation R in the form of R = {(a1,b1), (a2,b2), ..., (an,bn)}: "
+            );
+            inputRelation = scanner.next() + scanner.nextLine();
+        }
 
         // Step 3: Generate the matrix
-        String[][] matrix = generateMatrix(inputRelation);
+        String[] domainArray = getDomainArray(inputRelation);
+        String[] rangeArray =  getRangeArray(inputRelation);
+        String[][] matrix = generateMatrix(domainArray, rangeArray, inputRelation);
 
         // Step 4: Display the matrix
         if (matrix != null) {
-            System.out.println("Matrix representation of the relation R:");
-            printMatrix(matrix);
+            System.out.println("\nMatrix representation of the relation R:");
+            printMatrix(domainArray, rangeArray, matrix);
         } else {
             System.out.println("Invalid input. Please provide a valid relation in the specified format.");
         }
     }
 
-    //Accept alphabet and number
-    // Function to generate the matrix from the input relation
-    private static String[][] generateMatrix(String inputRelation) {
+    public static String[] getDomainArray(String inputRelation){
         String[] pairs = convertToArray(inputRelation);
         Set<String> domainSet = new HashSet<>();
-        Set<String> rangeSet = new HashSet<>();
 
         for (String pair : pairs) {
             String[] elements = pair.split(",");
             domainSet.add(elements[0]);
-            rangeSet.add(elements[1]);
         }
         String[] domainArray = domainSet.toArray(new String[0]);
+        return domainArray;
+    }
+    public static String[] getRangeArray(String inputRelation){
+        String[] pairs = convertToArray(inputRelation);
+        Set<String> rangeSet = new HashSet<>();
+
+        for (String pair : pairs) {
+            String[] elements = pair.split(",");
+            rangeSet.add(elements[1]);
+        }
         String[] rangeArray = rangeSet.toArray(new String[0]);
+        return rangeArray;
+    }
+    private static String[][] generateMatrix(String[] domainArray, String[] rangeArray, String inputRelation) {
+        String[] pairs = convertToArray(inputRelation);
 
         // Create the matrix
         String[][] matrix = new String[domainArray.length][rangeArray.length];
@@ -76,51 +95,24 @@ public class Main {
         return pairs;
     }
 
+//{(1,2),(1,3),(1,4),(1,5),(2,3),(2,4),(2,5),(3,4),(3,5),(4,5)}
 
     // Function to print the matrix
-    private static void printMatrix(String[][] matrix) {
-        for (String[] row : matrix) {
-            for (String value : row) {
-                System.out.print(value != null ? value : "0");
-                System.out.print(" ");
+    private static void printMatrix(String[] domainArray, String[] rangeArray, String[][] matrix) {
+        //First (Column) Line
+        System.out.printf("%-3s|", "");
+        for (int i = 0; i < rangeArray.length; i++) {
+            System.out.printf("%-3s|", rangeArray[i]);
+        }
+        System.out.println();
+        for (int i = 0; i < matrix.length; i++) {
+            String[] row = matrix[i];
+            System.out.printf("%-3s|", domainArray[i]);
+            for (int j = 0; j < row.length; j++) {
+                String value = row[j];
+                System.out.printf("%-3s|", value != null ? value : "0");
             }
             System.out.println();
         }
     }
 }
-
-// Accept number only
-//    // Function to generate the matrix from the input relation
-//    private static int[][] generateMatrix(String inputRelation) {
-//
-//        String[] pairs = convertToArray(inputRelation);
-//
-//        int maxDomain = 0;
-//        int maxRange = 0;
-//
-//        for (String s : pairs) {
-//            String[] elements = s.split(",");
-//            int curDomain = Integer.parseInt(elements[0]);
-//            int curRange = Integer.parseInt(elements[1]);
-//
-//            maxDomain = Math.max(maxDomain, curDomain);
-//            maxRange = Math.max(maxRange, curRange);
-//        }
-//
-//        // Create the matrix
-//        int[][] matrix = new int[maxDomain][maxRange];
-//
-//        // Fill the matrix based on the input relation
-//        for (String pair : pairs) {
-//            String[] elements = pair.split(",");
-//            int a = Integer.parseInt(elements[0]) - 1;  // Adjust index to start from 0
-//            int b = Integer.parseInt(elements[1]) - 1;  // Adjust index to start from 0
-//            matrix[a][b] = 1;  // Mark the position in the matrix
-//        }
-//
-//        if(maxDomain == 0){
-//            return null;
-//        }else{
-//            return matrix;
-//        }
-//    }

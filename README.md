@@ -15,9 +15,12 @@ Solution Makers
 
 ## Result
 ### Output 1:
-![Output 1](resources/output1.png)
+![Output 1.png](resources/Output%201.png)
 
 ### Output 2:
-![Output 2](resources/output2.png)
+![Output 2.png](resources/Output%202.png)
+
+### Output 3:
+![Output 3.png](resources/Output%203.png)
 
 
