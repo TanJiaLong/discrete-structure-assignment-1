@@ -35,7 +35,7 @@ public class Main {
 
     public static String[] getDomainArray(String inputRelation){
         String[] pairs = convertToArray(inputRelation);
-        Set<String> domainSet = new HashSet<>();
+        Set<String> domainSet = new LinkedHashSet<>();
 
         for (String pair : pairs) {
             String[] elements = pair.split(",");
@@ -46,7 +46,7 @@ public class Main {
     }
     public static String[] getRangeArray(String inputRelation){
         String[] pairs = convertToArray(inputRelation);
-        Set<String> rangeSet = new HashSet<>();
+        Set<String> rangeSet = new LinkedHashSet<>();
 
         for (String pair : pairs) {
             String[] elements = pair.split(",");
