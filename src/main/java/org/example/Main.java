@@ -6,7 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Step 2: Ask the user to input the relation in the specified format
+        // Step 1: Ask the user to input the relation in the specified format
+        System.out.println("Step 1: Request User Input");
         System.out.print(
                 "Enter relation R in the form of R = {(a1,b1), (a2,b2), ..., (an,bn)}: "
         );
@@ -18,15 +19,19 @@ public class Main {
             );
             inputRelation = scanner.next() + scanner.nextLine();
         }
+        System.out.println();
 
-        // Step 3: Generate the matrix
+        // Step 2: Determine Domain
         String[] domainArray = getDomainArray(inputRelation);
+        // Step 3: Determine Range
         String[] rangeArray =  getRangeArray(inputRelation);
+        // Step 4: Generate the matrix
         String[][] matrix = generateMatrix(domainArray, rangeArray, inputRelation);
 
-        // Step 4: Display the matrix
+        // Step 5: Display the matrix
         if (matrix != null) {
-            System.out.println("\nMatrix representation of the relation R:");
+            System.out.println("Step 4: Print Matrix");
+            System.out.println("Matrix representation of the relation R:");
             printMatrix(domainArray, rangeArray, matrix);
         } else {
             System.out.println("Invalid input. Please provide a valid relation in the specified format.");
@@ -34,6 +39,7 @@ public class Main {
     }
 
     public static String[] getDomainArray(String inputRelation){
+        System.out.println("Step 2: Determine Domain");
         String[] pairs = convertToArray(inputRelation);
         Set<String> domainSet = new LinkedHashSet<>();
 
@@ -42,9 +48,11 @@ public class Main {
             domainSet.add(elements[0]);
         }
         String[] domainArray = domainSet.toArray(new String[0]);
+        System.out.println("Domain: " + Arrays.toString(domainArray) + "\n");
         return domainArray;
     }
     public static String[] getRangeArray(String inputRelation){
+        System.out.println("Step 3: Determine Range");
         String[] pairs = convertToArray(inputRelation);
         Set<String> rangeSet = new LinkedHashSet<>();
 
@@ -53,6 +61,7 @@ public class Main {
             rangeSet.add(elements[1]);
         }
         String[] rangeArray = rangeSet.toArray(new String[0]);
+        System.out.println("Range: " + Arrays.toString(rangeArray) + "\n");
         return rangeArray;
     }
     private static String[][] generateMatrix(String[] domainArray, String[] rangeArray, String inputRelation) {
