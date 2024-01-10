@@ -6,6 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+//        {(1,2),(1,3),(1,4),(1,5),(2,3),(3,4),(3,5)}
+
         // Step 1: Ask the user to input the relation in the specified format
         System.out.println("Step 1: Request User Input");
         System.out.print(
